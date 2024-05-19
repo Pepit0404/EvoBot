@@ -7,6 +7,6 @@ module.exports = {
 
         client.user.setActivity("le néant", {type: ActivityType.Watching});
 
-        console.log("\x1b[32m", `\n ${client.user.username} is online\n`, "\x1b[37m");
+        console.log("\x1b[32m", `\n[${client.user.username} online]\n`, "\x1b[37m");
     }
 };

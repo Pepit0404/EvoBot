@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = async client => {
+module.exports = client => {
     let count = 0;
     const dirsCommands = fs.readdirSync("./commands/");
     
