@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "discord.js": "^14.15.2",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security"
+  },
+  "name": "evobot",
+  "description": "",
+  "version": "1.0.0",
+  "main": "evobot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node evobot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pepit0404/EvoBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pepit0404/EvoBot/issues"
+  },
+  "homepage": "https://github.com/Pepit0404/EvoBot#readme"
+}
