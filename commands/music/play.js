@@ -13,7 +13,7 @@ module.exports = {
      .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
      .addStringOption(opt => opt
         .setName("song")
-        .setDescription("The song to play")
+        .setDescription("Name or link of the song")
         .setRequired(true)
      )
      .addNumberOption(opt => opt
@@ -32,8 +32,14 @@ module.exports = {
 
         const voiceChannelUser = interaction.member.voice.channel;
         const voiceChannelBot = (await interaction.guild.members.fetchMe()).voice.channel;
-        if (!voiceChannelUser) return await interaction.reply("You are not in a voice channel");
-        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) return await interaction.reply("You are not in the same channel than me"); 
+        if (!voiceChannelUser) {
+            await interaction.followUp("You are not in a voice channel");
+            return;
+        }
+        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) {
+            await interaction.followUp("You are not in the same channel than me");
+            return;
+        } 
 
 
         try {
@@ -42,9 +48,8 @@ module.exports = {
                 nodeOptions: {
                     metadata: interaction,
                     volume: 70,
-                    leaveOnStop: false,
-                    leaveOnEndCooldown: 180,
-                    leaveOnEmptyCooldown: 90,
+                    leaveOnEndCooldown: 500,
+                    leaveOnEmptyCooldown: 500,
                     selfDeaf: true
                 }
             });
