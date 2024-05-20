@@ -16,7 +16,7 @@ module.exports = {
         await message.reply("Pong !");
     },
 
-    async runSlash(interaction) {
+    async runSlash(interaction, args) {
         await interaction.reply("Pong !");
     }
 };

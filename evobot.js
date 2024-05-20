@@ -9,6 +9,7 @@ const loadEvents = require("./loaders/loadEvents");
 const loadInteractions = require("./loaders/loadInteractions")
 
 client.commands = new Discord.Collection();
+client.interactions = new Discord.Collection();
 client.player = new Player(client, {
     ytdlOptions: {
         filter: "audioonly",

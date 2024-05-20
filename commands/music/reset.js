@@ -29,7 +29,7 @@ module.exports = {
         interaction.reply("Queue reset");
     },
 
-    async runSlash(interaction) {
+    async runSlash(interaction, args) {
         const queue = useQueue(interaction.guild.id);
         if (!queue || !queue.isPlaying()){
             return await interaction.reply("I don't play music");
@@ -37,9 +37,14 @@ module.exports = {
 
         const voiceChannelUser = interaction.member.voice.channel;
         const voiceChannelBot = (await interaction.guild.members.fetchMe()).voice.channel;
-        if (!voiceChannelUser) return await interaction.followUp("You are not in a voice channel");
-        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) return await interaction.followUp("You are not in the same channel than me"); 
-
+        if (!voiceChannelUser) {
+            await interaction.reply("You are not in a voice channel");
+            return null;
+        }
+        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) {
+            await interaction.reply("You are not in the same channel than me"); 
+            return null;
+        }
         queue.node.stop();
         queue.delete();
         await interaction.reply("Queue reset");

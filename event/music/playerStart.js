@@ -1,7 +1,10 @@
+const { ButtonBuilder, ActionRowBuilder } = require("@discordjs/builders");
+const { EmbedBuilder, ButtonStyle } = require("discord.js");
+const embed = require("../../ressources/embeds/player");
+
 module.exports = {
     name: "playerStart",
     async run(client, queue, track) {
-        // a changer ça
-        await queue.metadata.channel.send(`The music ${track.title} (${track.duration}) request by ${track.requestedBy.username} is playing`);
+        await queue.metadata.channel.send(embed.exportEmbed(client, queue, track))
     }
 };

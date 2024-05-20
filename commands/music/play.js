@@ -26,14 +26,14 @@ module.exports = {
         return ;
     },
 
-    async runSlash(interaction) {
+    async runSlash(interaction, args) {
         await interaction.deferReply({ephemeral: true});
         const song = interaction.options.getString("song");
 
         const voiceChannelUser = interaction.member.voice.channel;
         const voiceChannelBot = (await interaction.guild.members.fetchMe()).voice.channel;
-        if (!voiceChannelUser) return await interaction.followUp("You are not in a voice channel");
-        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) return await interaction.followUp("You are not in the same channel than me"); 
+        if (!voiceChannelUser) return await interaction.reply("You are not in a voice channel");
+        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) return await interaction.reply("You are not in the same channel than me"); 
 
 
         try {
@@ -41,8 +41,8 @@ module.exports = {
                 requestedBy: interaction.user,
                 nodeOptions: {
                     metadata: interaction,
-                    volume: 90,
-                    leaveOnStopCooldown: 300,
+                    volume: 70,
+                    leaveOnStop: false,
                     leaveOnEndCooldown: 180,
                     leaveOnEmptyCooldown: 90,
                     selfDeaf: true

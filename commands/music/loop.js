@@ -1,5 +1,5 @@
 const { useQueue, QueueRepeatMode } = require("discord-player");
-const { SlashCommandBuilder, PermissionFlagsBits, transformResolved } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 const name = "loop";
 const description = "Loop ont the queue or on the track"
@@ -23,7 +23,7 @@ module.exports = {
         return;
     },
 
-    async runSlash(interaction) {
+    async runSlash(interaction, args) {
         const queue = useQueue(interaction.guild.id);
         if (!queue || !queue.isPlaying()){
             return await interaction.reply("I don't play music");
@@ -31,8 +31,14 @@ module.exports = {
 
         const voiceChannelUser = interaction.member.voice.channel;
         const voiceChannelBot = (await interaction.guild.members.fetchMe()).voice.channel;
-        if (!voiceChannelUser) return await interaction.followUp("You are not in a voice channel");
-        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) return await interaction.followUp("You are not in the same channel than me"); 
+        if (!voiceChannelUser) {
+            await interaction.reply("You are not in a voice channel");
+            return null;
+        }
+        if (voiceChannelBot && voiceChannelBot.id !== voiceChannelUser.id) {
+            await interaction.reply("You are not in the same channel than me"); 
+            return null;
+        }
 
         const option = interaction.options.getString("option");
         if (option !== "track" && option !== "queue") {
