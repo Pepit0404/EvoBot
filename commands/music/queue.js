@@ -22,7 +22,7 @@ module.exports = {
         const queue = useQueue(interaction.guild.id);
         
         if (!queue || !queue.isPlaying()) return await interaction.reply("I don't play music");
-        if (queue.history.nextTrack) return await interaction.reply("There isn't music after this one");
+        if (!queue.history.nextTrack) return await interaction.reply("There isn't music after this one");
         
         await interaction.reply(embed.exportEmbed(queue, 0));
     }

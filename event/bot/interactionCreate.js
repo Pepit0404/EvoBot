@@ -18,7 +18,11 @@ module.exports = {
                 if (file.permission && !interaction.member.permissions.has(new PermissionsBitField(file.permission))) {
                     return await interaction.reply(`You don't have the permission to excecute this component`);
                 }
-                await file.runSlash(client, interaction, ...args);
+                try {
+                    await file.runSlash(client, interaction, ...args);
+                } catch (e) {
+                    // pass
+                }
             break;
         };
     }

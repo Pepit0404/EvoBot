@@ -11,6 +11,10 @@ module.exports = {
         const commandName = arrayMessage[0].replace(prefix, "");
         const command = client.commands.get(commandName);
 
-        command.run(client, message);
+        try{
+            command.run(client, message);
+        } catch (e) {
+            // pass
+        }
     }
 }

@@ -20,13 +20,11 @@ Embed = function(queue, where) {
 }
 
 field = function(queue, where, embed) {
-    for (let i=where; i < where; i++) {
-        if (i < queue.tracks.data.length) {
-            embed.addFields({ 
-                name: `In ${i+1} music:`, 
-                value: `${queue.tracks.data[i].title} (${queue.tracks.data[i].duration} min) by ${queue.tracks.data[i].author}`
-            });
-        }
+    for (let i=where; i < queue.tracks.data.length; i++) { 
+        embed.addFields({ 
+            name: `In ${i+1} music:`, 
+            value: `${queue.tracks.data[i].title} (${queue.tracks.data[i].duration} min) by ${queue.tracks.data[i].author}`
+        });
     }
     return embed;
 }
