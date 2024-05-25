@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const embed = require("../../ressources/embeds/playE");
 
+const MINUTE = 1000*60;
+
 const name = "play";
 const description = "Play a music"
 
@@ -16,11 +18,6 @@ module.exports = {
         .setName("song")
         .setDescription("Name or link of the song")
         .setRequired(true)
-     )
-     .addNumberOption(opt => opt
-        .setName("volume")
-        .setDescription("The desired volume")
-        .setRequired(false)
      ),
     
     async run(client, message) {
@@ -48,9 +45,9 @@ module.exports = {
                 requestedBy: interaction.user,
                 nodeOptions: {
                     metadata: interaction,
-                    volume: 70,
-                    leaveOnEndCooldown: 500,
-                    leaveOnEmptyCooldown: 500,
+                    volume: 10,
+                    leaveOnEndCooldown: MINUTE*5,
+                    leaveOnEmptyCooldown: MINUTE*2,
                     selfDeaf: true
                 }
             });
