@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const embed = require("../../ressources/embeds/playE");
 
 const name = "play";
 const description = "Play a music"
@@ -54,8 +55,9 @@ module.exports = {
                 }
             });
     
-            await interaction.followUp(`Add to queue : ${track.title} (${track.duration})`);
+            await interaction.followUp(embed.exportEmbed(interaction, track));
         } catch (except) {
+            console.log(except);
             return await interaction.followUp(`The music ${song} was not found`);
         }
         
